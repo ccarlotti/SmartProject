@@ -36,8 +36,18 @@ public class Main extends Activity {
         bind(); // recuperer les composants graphiques
     }
 
-    private void bind() {
-
+    private void bind()
+    {
+        heaterNameTextView = (TextView) findViewById(R.id.heaterNameTextView);
+        powerLowRadioButton = (RadioButton) findViewById(R.id.powerLowRadioButton);
+        powerMediumRadioButton = (RadioButton) findViewById(R.id.powerMediumRadioButton);
+        powerHighRadioButton = (RadioButton) findViewById(R.id.powerHighRadioButton);
+        onlineImageView = (ImageView) findViewById(R.id.onlineImageView);
+        temperatureSetPointTextView = (TextView) findViewById(R.id.temperatureSetPointTextView);
+        heaterModeTextView = (TextView) findViewById(R.id.heaterModeTextView);
+        localModeCheckBox = (CheckBox) findViewById(R.id.localModeCheckBox);
+        TemperatureOffsetTextView = (TextView) findViewById(R.id.TemperatureOffsetTextView);
+        TemperatureOffsetSeekBar = (SeekBar) findViewById(R.id.TemperatureOffsetSeekBar);
     }
 
 }
