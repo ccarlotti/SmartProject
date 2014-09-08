@@ -4,5 +4,12 @@
     <string name="app_name">SmartProject</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="low">low</string>
+    <string name="middle">middle</string>
+    <string name="high">high</string>
+    <string name="setting">Settings</string>
+    <string name="Local_mode_enabled">Local mode enabled</string>
+    <string name="delete">Delete</string>
+    <string name="offset">Offset</string>
 
 </resources>
