@@ -3,7 +3,21 @@ package florianburel.fr.smartproject;
 /**
  * Created by fl0 on 08/09/2014.
  */
+
+
+
 public class Heater {
+
+    public enum HeaterMode
+    {
+        ECO, CONFORT, STOP, HORS_GEL, PROG,
+    }
+
+    public enum HeaterPower
+    {
+        HIGH, MEDIUM, LOW
+
+    }
 
     private String name;
     private HeaterPower power;
@@ -18,7 +32,7 @@ public class Heater {
 
     public Heater() {
         name = "bedroom_1";
-        power = HeaterPower.MIDDLE;
+        power = HeaterPower.MEDIUM;
         online = false;
         point = 20;
         mode = HeaterMode.ECO;
