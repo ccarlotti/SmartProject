@@ -1,6 +1,7 @@
 package florianburel.fr.smartproject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by fl0 on 09/09/2014.
@@ -65,10 +66,11 @@ public class Zone
             h.setName(name);
             heaters.add(h);
         }
+        Random r = new Random();
+        this.point = Math.abs(r.nextInt() % 8) + 16;
 
     }
 
-    // TODO : une nouvelle zone doit avoir un sp entre 16 et 25;
     // TODO : une nouvelle zone doit etre creer en mode STOPPED
     // TODO : Changer le sp d'une zone change le sp de tous ses radiateurs
     // TODO : Changer le mode d'une zone change le mode de tous ces radiateurs.
