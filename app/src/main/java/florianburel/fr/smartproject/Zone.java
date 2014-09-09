@@ -14,7 +14,7 @@ public class Zone
     }
 
     private String name;
-    private ArrayList<Heater> heaters;
+    private ArrayList<Heater> heaters = new ArrayList<Heater>();
     private double point;
     private HeatingMode mode;
 
@@ -58,9 +58,16 @@ public class Zone
     public Zone(String name) {
         this.name = name;
 
+        for(int i = 0 ; i < 10 ; i++)
+        {
+            String heaterName = name + "_" + (i+1);
+            Heater h = new Heater();
+            h.setName(name);
+            heaters.add(h);
+        }
+
     }
 
-    // TODO : une nouvelle zone doit avoir 10 radiateurs
     // TODO : une nouvelle zone doit avoir un sp entre 16 et 25;
     // TODO : une nouvelle zone doit etre creer en mode STOPPED
     // TODO : Changer le sp d'une zone change le sp de tous ses radiateurs
