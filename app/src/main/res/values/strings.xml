@@ -11,5 +11,10 @@
     <string name="Local_mode_enabled">Local mode enabled</string>
     <string name="delete">Delete</string>
     <string name="offset">Offset</string>
+    <string name="eco">Eco</string>
+    <string name="confort">Confort</string>
+    <string name="stopped">Stopped</string>
+    <string name="freeze">Freeze</string>
+    <string name="prog">Prog</string>
 
 </resources>

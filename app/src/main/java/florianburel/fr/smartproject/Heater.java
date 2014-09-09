@@ -33,7 +33,7 @@ public class Heater {
     public Heater() {
         name = "bedroom_1";
         power = HeaterPower.MEDIUM;
-        online = false;
+        online = true;
         point = 20;
         mode = HeaterMode.ECO;
         localModeEnabled = true;

@@ -66,20 +66,20 @@ public class Main extends Activity {
         switch (heater.getMode())
         {
 
+            case ECO:
+                heaterModeTextView.setText(getString(R.string.eco));
+                break;
             case CONFORT:
-                heaterModeTextView.setText("Confort");
+                heaterModeTextView.setText(getString(R.string.confort));
                 break;
             case STOP:
-                heaterModeTextView.setText("Stopped");
-                break;
-            case ECO:
-                heaterModeTextView.setText("Eco");
+                heaterModeTextView.setText(getString(R.string.stopped));
                 break;
             case HORS_GEL:
-                heaterModeTextView.setText("Min");
+                heaterModeTextView.setText(getString(R.string.freeze));
                 break;
             case PROG:
-                heaterModeTextView.setText("Prog");
+                heaterModeTextView.setText(getString(R.string.prog));
                 break;
         }
 
@@ -91,6 +91,16 @@ public class Main extends Activity {
         temperatureOffsetTextView.setText(offset);
         int progress = (int) (100 * (heater.getOffset() + 8) / 16);
         temperatureOffsetSeekBar.setProgress(progress);
+        if(progress > 50)
+        {
+            int color = android.R.color.holo_red_dark;
+            temperatureOffsetTextView.setTextColor(getResources().getColor(color));
+        }
+        else
+        {
+            int color = android.R.color.holo_blue_dark;
+            temperatureOffsetTextView.setTextColor(getResources().getColor(color));
+        }
     }
 
     private void bind()
