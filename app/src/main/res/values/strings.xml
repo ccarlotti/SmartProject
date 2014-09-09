@@ -16,5 +16,6 @@
     <string name="stopped">Stopped</string>
     <string name="freeze">Freeze</string>
     <string name="prog">Prog</string>
+    <string name="title_activity_zone_detail">ZoneDetailActivity</string>
 
 </resources>
