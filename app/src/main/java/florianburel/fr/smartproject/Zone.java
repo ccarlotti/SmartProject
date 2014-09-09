@@ -69,9 +69,9 @@ public class Zone
         Random r = new Random();
         this.point = Math.abs(r.nextInt() % 8) + 16;
 
+        this.mode = HeatingMode.STOP;
     }
 
-    // TODO : une nouvelle zone doit etre creer en mode STOPPED
     // TODO : Changer le sp d'une zone change le sp de tous ses radiateurs
     // TODO : Changer le mode d'une zone change le mode de tous ces radiateurs.
 

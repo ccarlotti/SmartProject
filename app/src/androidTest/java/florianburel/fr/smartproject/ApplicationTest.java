@@ -33,7 +33,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         Zone z = new Zone("TEST");
         assertTrue(z.getMode() == Zone.HeatingMode.STOP);
     }
-    
+
     // TEST : Changer le sp d'une zone change le sp de tous ses radiateurs
     // TEST : Changer le mode d'une zone change le mode de tous ces radiateurs.
 
