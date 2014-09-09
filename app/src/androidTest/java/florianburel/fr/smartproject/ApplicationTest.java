@@ -50,7 +50,29 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
 
     }
-    // TEST : Changer le mode d'une zone change le mode de tous ces radiateurs.
 
+    // TEST : Changer le mode d'une zone change le mode de tous ces radiateurs.
+    public void testModeChangeToAllHeaters()
+    {
+        Zone z = new Zone("Test");
+
+        Zone.HeatingMode test;
+        test = Zone.HeatingMode.ECO;
+        z.setMode(test);
+
+        for(Heater h : z.getHeaters())
+        {
+            assertTrue(h.getMode() == test);
+        }
+
+        test = Zone.HeatingMode.PROG;
+        z.setMode(test);
+
+        for(Heater h : z.getHeaters())
+        {
+            assertTrue(h.getMode() == test);
+        }
+
+    }
 
 }
