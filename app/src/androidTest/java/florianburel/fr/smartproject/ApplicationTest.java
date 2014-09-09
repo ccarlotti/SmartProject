@@ -12,10 +12,18 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     // TEST : une nouvelle zone doit avoir 10 radiateurs
+    public void testNewZoneHas10Heaters()
+    {
+        Zone z = new Zone("test");
+
+        assertTrue(z.getHeaters().size() == 10);
+
+    }
+
     // TEST : une nouvelle zone doit avoir un sp entre 16 et 25;
     // TEST : une nouvelle zone doit etre creer en mode STOPPED
     // TEST : Changer le sp d'une zone change le sp de tous ses radiateurs
     // TEST : Changer le mode d'une zone change le mode de tous ces radiateurs.
 
-    
+
 }
