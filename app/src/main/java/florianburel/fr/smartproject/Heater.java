@@ -8,11 +8,6 @@ package florianburel.fr.smartproject;
 
 public class Heater {
 
-    public enum HeaterMode
-    {
-        ECO, CONFORT, STOP, HORS_GEL, PROG,
-    }
-
     public enum HeaterPower
     {
         HIGH, MEDIUM, LOW
@@ -23,7 +18,7 @@ public class Heater {
     private HeaterPower power;
     private boolean online;
     private double point;
-    private HeaterMode mode;
+    private Zone.HeatingMode mode;
     private boolean localModeEnabled;
     private int offset;
 
@@ -35,7 +30,7 @@ public class Heater {
         power = HeaterPower.MEDIUM;
         online = true;
         point = 20;
-        mode = HeaterMode.ECO;
+        mode = Zone.HeatingMode.ECO;
         localModeEnabled = true;
         offset = 2;
     }
@@ -59,7 +54,7 @@ public class Heater {
         return point;
     }
 
-    public HeaterMode getMode() {
+    public Zone.HeatingMode getMode() {
         return mode;
     }
 
@@ -83,7 +78,7 @@ public class Heater {
         this.point = point;
     }
 
-    public void setMode(HeaterMode mode) {
+    public void setMode(Zone.HeatingMode mode) {
         this.mode = mode;
     }
 
