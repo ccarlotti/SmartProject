@@ -42,6 +42,10 @@ public class Zone
     }
 
     public void setPoint(double point) {
+        for(Heater h : heaters)
+        {
+            h.setPoint(point);
+        }
         this.point = point;
     }
 
@@ -67,7 +71,7 @@ public class Zone
             heaters.add(h);
         }
         Random r = new Random();
-        this.point = Math.abs(r.nextInt() % 8) + 16;
+        this.setPoint(Math.abs(r.nextInt() % 8) + 16);
 
         this.mode = HeatingMode.STOP;
     }
