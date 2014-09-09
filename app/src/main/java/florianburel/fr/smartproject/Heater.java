@@ -25,7 +25,7 @@ public class Heater {
     private double point;
     private HeaterMode mode;
     private boolean localModeEnabled;
-    private double offset;
+    private int offset;
 
 
     // Constructors
@@ -67,7 +67,7 @@ public class Heater {
         return localModeEnabled;
     }
 
-    public double getOffset() {
+    public int getOffset() {
         return offset;
     }
 
@@ -91,7 +91,7 @@ public class Heater {
         this.localModeEnabled = localModeEnabled;
     }
 
-    public void setOffset(double offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
 }

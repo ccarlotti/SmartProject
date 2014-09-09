@@ -1,6 +1,7 @@
 package florianburel.fr.smartproject;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,7 +14,8 @@ import static android.R.drawable.star_big_off;
 import static android.R.drawable.star_big_on;
 
 
-public class Main extends Activity {
+public class Main extends Activity
+{
 
     private Heater heater = new Heater();
 
@@ -31,14 +33,104 @@ public class Main extends Activity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bind(); // recuperer les composants graphiques
+        addListeners();
         setDisplay(); // afficher les valeurs du model dans la vue
+
+
     }
 
-    private void setDisplay() {
+    private void addListeners() {
+
+        // checkbox local mode
+
+        localModeCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                heater.setLocalModeEnabled(localModeCheckBox.isChecked());
+
+            }
+        });
+
+        // Mode Checkbox
+
+        powerLowRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(powerLowRadioButton.isChecked())
+                {
+                    heater.setPower(Heater.HeaterPower.LOW);
+                }
+            }
+        });
+
+        powerMediumRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(powerLowRadioButton.isChecked())
+                {
+                    heater.setPower(Heater.HeaterPower.MEDIUM);
+                }
+            }
+        });
+
+        powerHighRadioButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(powerHighRadioButton.isChecked())
+                {
+                    heater.setPower(Heater.HeaterPower.HIGH);
+                }
+            }
+        });
+
+        // Offset
+        temperatureOffsetSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                int offset = (int)Math.round((double)progress * 16 / 100) ;
+                offset -= 8;
+
+
+                temperatureOffsetTextView.setText(offset + "°C");
+
+                if(progress > 50)
+                {
+                    int color = android.R.color.holo_red_dark;
+                    temperatureOffsetTextView.setTextColor(getResources().getColor(color));
+                }
+                else
+                {
+                    int color = android.R.color.holo_blue_dark;
+                    temperatureOffsetTextView.setTextColor(getResources().getColor(color));
+                }
+
+                heater.setOffset(offset);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+    }
+
+    private void setDisplay()
+    {
 
         //title
         heaterNameTextView.setText(heater.getName());
@@ -86,21 +178,12 @@ public class Main extends Activity {
         // local
         localModeCheckBox.setChecked(heater.isLocalModeEnabled());
 
+
         // offset
-        String offset = heater.getOffset() + "°C";
-        temperatureOffsetTextView.setText(offset);
-        int progress = (int) (100 * (heater.getOffset() + 8) / 16);
+
+        int progress = Math.round(100 * (heater.getOffset() + 8) / 16);
         temperatureOffsetSeekBar.setProgress(progress);
-        if(progress > 50)
-        {
-            int color = android.R.color.holo_red_dark;
-            temperatureOffsetTextView.setTextColor(getResources().getColor(color));
-        }
-        else
-        {
-            int color = android.R.color.holo_blue_dark;
-            temperatureOffsetTextView.setTextColor(getResources().getColor(color));
-        }
+
     }
 
     private void bind()
