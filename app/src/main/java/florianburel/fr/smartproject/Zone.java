@@ -58,14 +58,12 @@ public class Zone
     public Zone(String name) {
         this.name = name;
 
-
-        // TODO: Generer une liste de 10 radiateurs
-        // TODO: definir une temp de consigne pour la zone
-        // TODO: definir un mode pour la zone
-
     }
 
-    // TODO : fwd la temp de consigne à tous les radiateurs
-    // TODO : fwd le mode à tous les radiateurs
+    // TODO : une nouvelle zone doit avoir 10 radiateurs
+    // TODO : une nouvelle zone doit avoir un sp entre 16 et 25;
+    // TODO : une nouvelle zone doit etre creer en mode STOPPED
+    // TODO : Changer le sp d'une zone change le sp de tous ses radiateurs
+    // TODO : Changer le mode d'une zone change le mode de tous ces radiateurs.
 
 }
