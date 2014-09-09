@@ -71,7 +71,7 @@ public class Zone
         {
             String heaterName = name + "_" + (i+1);
             Heater h = new Heater();
-            h.setName(name);
+            h.setName(heaterName);
             heaters.add(h);
         }
         Random r = new Random();

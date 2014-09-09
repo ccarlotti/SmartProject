@@ -2,11 +2,19 @@ package florianburel.fr.smartproject;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
@@ -58,6 +66,9 @@ public class ZoneDetailActivity extends Activity {
         String setpoint = zone.getPoint() + "°C";
         zoneSetPointTextView.setText(setpoint);
 
+        // Liste des radiateurs
+        HeaterAdapter adapter = new HeaterAdapter();
+        heatersListView.setAdapter(adapter);
     }
 
     private void bind() {
@@ -67,4 +78,55 @@ public class ZoneDetailActivity extends Activity {
     }
 
 
+    private class HeaterAdapter extends BaseAdapter
+    {
+
+        @Override
+        public int getCount() {
+            // Retourne le nombre de cellules à afficher
+            return zone.getHeaters().size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            // Retourne l'objet (le radiateur) à la position i
+            return zone.getHeaters().get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            // Retourne un identifiant unique pour la position
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup)
+        {
+            // Récuperer l'élément à afficher
+            Heater heater = (Heater) getItem(i);
+
+            // Récuperer une cellule d'apres le layout XML
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            View cell = inflater.inflate(R.layout.cell_heater, null);
+
+            // Recupération des elements graphiques
+            TextView cellTextView = (TextView) cell.findViewById(R.id.cellTextView);
+            ImageView cellImageView = (ImageView) cell.findViewById(R.id.cellImageView);
+
+            // Nom du radiateur
+            cellTextView.setText(heater.getName());
+
+            // Image online
+            if(heater.isOnline())
+            {
+                cellImageView.setImageResource(android.R.drawable.star_big_on);
+            }
+            else
+            {
+                cellImageView.setImageResource(android.R.drawable.star_big_off);
+            }
+
+            return cell;
+        }
+    }
 }
