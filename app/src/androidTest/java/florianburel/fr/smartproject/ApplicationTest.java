@@ -35,6 +35,21 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     // TEST : Changer le sp d'une zone change le sp de tous ses radiateurs
+    public void testSPChangeToAllHeaters()
+    {
+        Zone z = new Zone("Test");
+        for(int i = 16; i < 26; i++)
+        {
+            z.setPoint(i);
+
+            for(Heater h : z.getHeaters())
+            {
+                assertTrue(h.getPoint() == i);
+            }
+        }
+
+
+    }
     // TEST : Changer le mode d'une zone change le mode de tous ces radiateurs.
 
 
