@@ -21,6 +21,12 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     }
 
     // TEST : une nouvelle zone doit avoir un sp entre 16 et 25;
+    public void testNewZoneSPBetween16And25()
+    {
+        Zone z = new Zone("Test");
+        assertTrue(z.getPoint() < 26 && z.getPoint() > 15);
+    }
+
     // TEST : une nouvelle zone doit etre creer en mode STOPPED
     // TEST : Changer le sp d'une zone change le sp de tous ses radiateurs
     // TEST : Changer le mode d'une zone change le mode de tous ces radiateurs.
