@@ -17,5 +17,7 @@
     <string name="freeze">Freeze</string>
     <string name="prog">Prog</string>
     <string name="title_activity_zone_detail">ZoneDetailActivity</string>
+    <string name="mode">Mode : </string>
+    <string name="consigne_temperature">Setpoint : </string>
 
 </resources>
