@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.parse.Parse;
+
 import static android.R.drawable.star_big_off;
 import static android.R.drawable.star_big_on;
 
@@ -41,10 +43,10 @@ public class Main extends Activity
         addListeners();
         setDisplay(); // afficher les valeurs du model dans la vue
 
-
     }
 
     private void addListeners() {
+
 
         // checkbox local mode
 
