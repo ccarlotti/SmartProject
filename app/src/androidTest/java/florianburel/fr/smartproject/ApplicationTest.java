@@ -11,6 +11,26 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+
+    // TEST : Recuperation du reseau
+    public void testRetrieveNetwork()
+    {
+        NetworkManager mgr = NetworkManager.getInstance();
+
+        mgr.retrieveNetwork(new OnNetworkRetrievedListener() {
+            @Override
+            public void networkFound(Network n) {
+                n.getIdentifer().equals("toto");
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+
+        });
+    }
+
     // TEST : une nouvelle zone doit avoir 10 radiateurs
     public void testNewZoneHas10Heaters()
     {
@@ -74,5 +94,6 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         }
 
     }
+
 
 }
