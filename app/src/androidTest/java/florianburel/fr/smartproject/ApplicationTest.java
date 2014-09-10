@@ -11,6 +11,25 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    //TEST : Retrieve NetWork
+    public void testRetrieveNetWork()
+    {
+        NetworkManager mgr = NetworkManager.getInstance(); //c'est un SINGLETON donc pas de new
+
+        mgr.retrieveNetwork(new OnNetworkRetrivedListener()
+        {
+            @Override
+            public void networkFound(Network n) {
+                assertTrue(n.getIdentifier().equals("toto"));
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+        });
+    }
+
     // TEST : une nouvelle zone doit avoir 10 radiateurs
     public void testNewZoneHas10Heaters()
     {
