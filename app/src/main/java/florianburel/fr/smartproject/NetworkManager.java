@@ -16,7 +16,7 @@ public class NetworkManager
 
     public void retrieveNetwork(final OnNetworkRetrievedListener l)
     {
-
+        //Délais virtuel d'attente de 10s
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
