@@ -16,6 +16,13 @@
             android:label="@string/title_activity_zone_detail" >
 
         </activity>
+
+        <activity
+            android:name=".MyHouse"
+            android:label="My Home" >
+
+        </activity>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
