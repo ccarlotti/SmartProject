@@ -20,7 +20,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         Context ctx = getApplication().getApplicationContext();
         ConnectServer csv = ConnectServer.getInstance(ctx);
 
-        csv.login("worldsat","test",new OnServerLoginListener() {
+        csv.login("ccarlotti@worldsat.fr","cachou13100",new OnServerLoginListener() {
             @Override
             public void OnSucces() {
                 assertTrue(true);

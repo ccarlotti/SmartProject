@@ -13,7 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 
-public class MyHouse extends Activity {
+public class MyHouseActivity extends Activity {
 
     private TextView titleTextView;
     private TextView roomsListTextView;
@@ -25,7 +25,18 @@ public class MyHouse extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_house);
+
         bind();
+
+        //Si j'ai un intent avec des données
+        int value=0;
+        try {
+            value = this.getIntent().getExtras().getInt("dummy_value"); // dummy value passée depuis LoginActivity
+        }
+        catch (NullPointerException e)
+        {
+            //ya un pb !
+        }
 
         ProgressDialog progressBar = new ProgressDialog(this);
         progressBar.setMessage("Recherche vos pièces installées.");
@@ -46,14 +57,6 @@ public class MyHouse extends Activity {
         roomsListView = (ListView) findViewById(R.id.roomsListView);
 
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my_house, menu);
-        return true;
     }
 
     @Override

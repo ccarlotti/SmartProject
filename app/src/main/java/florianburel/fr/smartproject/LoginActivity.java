@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -138,11 +139,15 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
             ConnectServer csv = ConnectServer.getInstance(this); //this car activité en cours
 
             csv.login(emailSaisie,passwordSaisie,new OnServerLoginListener() {
-                // si ok : efface le spinner, on va l'ecran suivant
+                // si ok : efface le spinner, on va à l'ecran suivant
                 @Override
                 public void OnSucces() {
                     dialog.dismiss();//pour effacer le spinner
 
+                    //On bascule sur l'autre activity "my_house_activity"
+                    Intent t = new Intent(context,MyHouseActivity.class);
+                    t.putExtra("dummy_value",10); //Valeur à passer à MyHouseActivity
+                    startActivity(t); //aller on change d'activitiy !
                 }
                 // si erreur : effacer email / password et afficher un msg
                 @Override

@@ -18,7 +18,7 @@
         </activity>
 
         <activity
-            android:name=".MyHouse"
+            android:name=".MyHouseActivity"
             android:label="My Home" >
 
         </activity>
