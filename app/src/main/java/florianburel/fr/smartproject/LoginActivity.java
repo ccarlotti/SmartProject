@@ -4,9 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -71,20 +73,8 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
 
         // Find the Google+ sign in button.
         mPlusSignInButton = (SignInButton) findViewById(R.id.plus_sign_in_button);
-        if (supportsGooglePlayServices()) {
-            // Set a listener to connect the user when the G+ button is clicked.
-            mPlusSignInButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    signIn();
-                }
-            });
-        } else {
-            // Don't offer G+ sign in if the app's version is too low to support Google Play
-            // Services.
-            mPlusSignInButton.setVisibility(View.GONE);
-            return;
-        }
+
+
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -128,23 +118,43 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
      */
     public void attemptLogin()
     {
-        String emailSaisie ="ccarlotti";
-        String passwordSaisie = "cachou";
+        final Context context = this;
+
+        //On récupère le compte et le pw
+        String emailSaisie = mEmailView.getText().toString(); //toString() car getText() retourne un tableau de char
+        String passwordSaisie = mPasswordView.getText().toString();
 
         // verification de l'email / password
         if(isEmailValid(emailSaisie) && isPasswordValid(passwordSaisie))
         {
             // afficher un spinner
-            ProgressDialog dialog = new ProgressDialog(this); // this : (Context) activité en cours!
+            final ProgressDialog dialog = new ProgressDialog(this); // this : (Context) activité en cours!
+            dialog.setTitle(getString(R.string.spinner_title)); //Titre du spinner indexé pour les langues
+            dialog.setMessage(getString(R.string.spinner_please_wait)); //Message du spinner
+            dialog.show();//pour afficher à l'écran
 
 
             // demander a Parse de l'authentifier
-            
+            ConnectServer csv = ConnectServer.getInstance(this); //this car activité en cours
 
-            // si ok : efface le spinner, on va l'ecran suivant
+            csv.login(emailSaisie,passwordSaisie,new OnServerLoginListener() {
+                // si ok : efface le spinner, on va l'ecran suivant
+                @Override
+                public void OnSucces() {
+                    dialog.dismiss();//pour effacer le spinner
 
+                }
+                // si erreur : effacer email / password et afficher un msg
+                @Override
+                public void OnFailed() {
+                    dialog.dismiss();//pour effacer le spinner
+                    AlertDialog.Builder ad = new AlertDialog.Builder(context); //this est le context en cours
+                    ad.setTitle(getString(R.string.error_login_popup_title)); //Title du popup
+                    ad.setMessage(getString(R.string.error_login_popup_msg));//Msg du popup
+                    ad.show();
 
-            // si erreur : effacer email / password et afficher un msg
+                }
+            });
 
         }
         else

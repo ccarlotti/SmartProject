@@ -19,5 +19,9 @@
     <string name="title_activity_zone_detail">ZoneDetailActivity</string>
     <string name="mode">Mode : </string>
     <string name="consigne_temperature">Setpoint : </string>
+    <string name="spinner_title">Message</string>
+    <string name="spinner_please_wait">Patientez s\'il vous plaît...</string>
+    <string name="error_login_popup_title">Message</string>
+    <string name="error_login_popup_msg">Connection impossible</string>
 
 </resources>
