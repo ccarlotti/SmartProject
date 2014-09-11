@@ -1,5 +1,8 @@
 package florianburel.fr.smartproject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by fl0 on 10/09/2014.
  */
@@ -8,8 +11,20 @@ public class NetworkManager
 
     private Network network;
 
-    public void retrieveNetwork(OnNetworkRetrievedListener l)
+    public void retrieveNetwork(final OnNetworkRetrievedListener l)
     {
+
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                Network n = new Network("toto");
+                l.networkFound(n);
+            }
+        };
+
+        Timer timer = new Timer();
+        timer.schedule(task, 10000);
+
      /*   if(network != null)
         {
             l.networkFound(network);
