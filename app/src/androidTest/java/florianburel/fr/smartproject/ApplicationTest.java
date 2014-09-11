@@ -1,6 +1,7 @@
 package florianburel.fr.smartproject;
 
 import android.app.Application;
+import android.content.Context;
 import android.test.ApplicationTestCase;
 
 /**
@@ -11,6 +12,28 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+       //TEST login with ConnectServer
+    public void testConnecServerLogin()
+    {
+        //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
+        createApplication(); //Permet de récupérer un context dans les tests unitaires
+        Context ctx = getApplication().getApplicationContext();
+        ConnectServer csv = ConnectServer.getInstance(ctx);
+
+        csv.login("worldsat","test",new OnServerLoginListener() {
+            @Override
+            public void OnSucces() {
+                assertTrue(true);
+
+            }
+
+            @Override
+            public void OnFailed() {
+                assertTrue(false);
+
+            }
+        });
+    }
 
     // TEST : Recuperation du reseau
     public void testRetrieveNetwork()
@@ -25,6 +48,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 
             @Override
             public void onError(Exception e) {
+                assertTrue(false);
 
             }
 

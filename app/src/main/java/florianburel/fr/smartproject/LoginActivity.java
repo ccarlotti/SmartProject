@@ -128,8 +128,8 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
      */
     public void attemptLogin()
     {
-        String emailSaisie = ...;
-        String passwordSaisie = ...;
+        String emailSaisie ="ccarlotti";
+        String passwordSaisie = "cachou";
 
         // verification de l'email / password
         if(isEmailValid(emailSaisie) && isPasswordValid(passwordSaisie))
