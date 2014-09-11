@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MyHouseActivity extends Activity {
     private Network network;
-    private ArrayList<Zone> zones = new ArrayList<Zone>();
+    private ArrayList<Zone> zones ;
     private TextView titleTextView;
     private TextView roomsListTextView;
     private ImageButton addRoomImageButton;
