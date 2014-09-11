@@ -35,6 +35,41 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         });
     }
 
+    //TEST : getNetworkId with ConnectServer
+    public void testConnectServerGetNetworkId()
+    {
+        /*****************/
+        /* Connection */
+        /****************/
+        //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
+        createApplication(); //Permet de récupérer un context dans les tests unitaires
+        Context ctx = getApplication().getApplicationContext();
+        final ConnectServer csv = ConnectServer.getInstance(ctx);
+
+        csv.login("ccarlotti@worldsat.fr","cachou13100",new OnServerLoginListener() {
+            @Override
+            public void OnSucces()
+            {
+                /****************/
+                /* getNetworkID */
+                /****************/
+                csv.getNetworkId(new OnServerGetNetworkIdListener() {
+                    @Override
+                    public void onNetworkFound(String id)
+                    {
+                        String s = "ADADADAD"; //NetworhID de test dans la table "networkID" de PARSE
+                        assertTrue(id.equals(s));
+                    }
+                });
+            }
+
+            @Override
+            public void OnFailed() {
+
+            }
+        });
+    }
+
     // TEST : Recuperation du reseau
     public void testRetrieveNetwork()
     {
