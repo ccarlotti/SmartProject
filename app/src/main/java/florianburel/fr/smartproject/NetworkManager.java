@@ -1,5 +1,8 @@
 package florianburel.fr.smartproject;
 
+import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,8 +51,20 @@ public class NetworkManager
         }*/
     }
 
+    public ArrayList<Zone> getAllZone(Context context)
+    {
+        ArrayList<Zone> z=  new ArrayList<Zone>();
+        z.add(new Zone("toto"));
+        z.add(new Zone("titi"));
+        z.add(new Zone("tutu"));
+        z.add(new Zone("tata"));
+        return z;
+    }
 
-
+    public Zone addZone(Context context, String name)
+    {
+        return new Zone(name);
+    }
 
 
 
