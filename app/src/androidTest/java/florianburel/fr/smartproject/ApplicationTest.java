@@ -1,6 +1,7 @@
 package florianburel.fr.smartproject;
 
 import android.app.Application;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.test.ApplicationTestCase;
 
@@ -12,6 +13,13 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+
+    // Test bluetooth
+    public void testHasBluetooth()
+    {
+        assertNotNull(BluetoothAdapter.getDefaultAdapter());
+    }
+
        //TEST login with ConnectServer
     public void testConnecServerLogin()
     {
@@ -20,7 +28,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         Context ctx = getApplication().getApplicationContext();
         ConnectServer csv = ConnectServer.getInstance(ctx);
 
-        csv.login("ccarlotti@worldsat.fr","cachou13100",new OnServerLoginListener() {
+        csv.login("ccarlotti@worldsat.fr", "cachou13100", new OnServerLoginListener() {
             @Override
             public void OnSucces() {
                 assertTrue(true);
