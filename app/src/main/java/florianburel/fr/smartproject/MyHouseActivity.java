@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MyHouseActivity extends Activity {
     private Network network;
-    private ArrayList<Zone> zones ;
+    private ArrayList<Zone> zones;
     private TextView titleTextView;
     private TextView roomsListTextView;
     private ImageButton addRoomImageButton;
@@ -61,7 +61,9 @@ public class MyHouseActivity extends Activity {
 
                 progressBar.dismiss();
                 network = n;
-                refresh();
+                recupZones();
+                
+                
 
 
             }
@@ -75,10 +77,30 @@ public class MyHouseActivity extends Activity {
         });
     }
 
-    private void refresh() {
+    private void recupZones() {
         // Je récupère les noms de zones leur point et leur HeatingMode
+        NetworkManager mgr = NetworkManager.getInstance();
+        zones = mgr.getAllZone(this);
+        
+        if(zones.size()==0){
+            //Afficher le tuto
+        }
+        else{
+            refresh();
+        }
+        
+        
+        
+        
+        
+       
+        
+        
 
 
+    }
+
+    private void refresh() {
     }
 
 
