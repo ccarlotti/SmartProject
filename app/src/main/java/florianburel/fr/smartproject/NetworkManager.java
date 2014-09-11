@@ -6,18 +6,31 @@ package florianburel.fr.smartproject;
 public class NetworkManager
 {
 
+    private Network network;
 
     public void retrieveNetwork(OnNetworkRetrievedListener l)
     {
-        // do something
+     /*   if(network != null)
+        {
+            l.networkFound(network);
+        }
+        else
+        {
+            String network_id = recupereIDDansLesPreferencesDeLAppli();
 
-        Network n = new Network("toto");
-
-        l.networkFound(n);
-
-        l.onError(new Exception());
-
-
+            if(network_id != null)
+            {
+                network = new Network(network_id);
+                l.networkFound(network);
+            }
+            else
+            {
+                network_id = recupererLIDViaParse();
+                saveDansLesPreferencesDeLAppli(network_id);
+                network = new Network(network_id);
+                l.networkFound(network);
+            }
+        }*/
     }
 
 
