@@ -12,9 +12,12 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 
 public class MyHouseActivity extends Activity {
-
+    private Network network;
+    private ArrayList<Zone> zones = new ArrayList<Zone>();
     private TextView titleTextView;
     private TextView roomsListTextView;
     private ImageButton addRoomImageButton;
@@ -38,14 +41,45 @@ public class MyHouseActivity extends Activity {
             //ya un pb !
         }
 
-        ProgressDialog progressBar = new ProgressDialog(this);
-        progressBar.setMessage("Recherche vos pièces installées.");
-        progressBar.show();
+
+        recupReseau();
        
         
     }
 
+    private void recupReseau() {
 
+        final ProgressDialog progressBar = new ProgressDialog(this);
+        progressBar.setMessage("Bienvenue sur l'application SmartPilot");
+        progressBar.show();
+
+        NetworkManager mgr = NetworkManager.getInstance();
+
+        mgr.retrieveNetwork(new OnNetworkRetrievedListener() {
+            @Override
+            public void networkFound(Network n) {
+
+                progressBar.dismiss();
+                network = n;
+                refresh();
+
+
+            }
+
+            @Override
+            public void onError(Exception e) {
+                progressBar.setMessage("Impossible de se connecter au réseau");
+
+            }
+
+        });
+    }
+
+    private void refresh() {
+        // Je récupère les noms de zones leur point et leur HeatingMode
+
+
+    }
 
 
     private void bind() {

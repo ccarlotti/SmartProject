@@ -15,4 +15,6 @@ public class Network {
     public String getIdentifer() {
         return identifer;
     }
+
+
 }
