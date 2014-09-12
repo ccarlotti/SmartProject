@@ -1,6 +1,7 @@
 package florianburel.fr.smartproject.activities;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,5 +36,12 @@ public class BluetoothActivity extends Activity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 
+
+    }
+
+    public boolean isBluetoothEnabled()
+    {
+        BluetoothAdapter blueAdapter = BluetoothAdapter.getDefaultAdapter();
+        return blueAdapter != null;
     }
 }
