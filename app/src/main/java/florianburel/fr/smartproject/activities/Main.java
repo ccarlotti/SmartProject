@@ -1,7 +1,6 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.activities;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -10,7 +9,8 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.parse.Parse;
+import florianburel.fr.smartproject.R;
+import florianburel.fr.smartproject.model.modelobjets.Heater;
 
 import static android.R.drawable.star_big_off;
 import static android.R.drawable.star_big_on;

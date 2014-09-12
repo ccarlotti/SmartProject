@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import florianburel.fr.smartproject.R;
 
 
 public class MyHouseActivity extends Activity {

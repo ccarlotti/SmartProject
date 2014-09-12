@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.model.webservice;
 
 import android.content.Context;
 

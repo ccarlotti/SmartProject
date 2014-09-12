@@ -8,23 +8,23 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Main"
+            android:name=".activities.Main"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".ZoneDetailActivity"
+            android:name=".activities.ZoneDetailActivity"
             android:label="@string/title_activity_zone_detail" >
 
         </activity>
 
         <activity
-            android:name=".MyHouseActivity"
+            android:name=".activities.MyHouseActivity"
             android:label="My Home" >
 
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateHidden" >
             <intent-filter>

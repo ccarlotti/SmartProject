@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.model.webservice;
 
 /**
  * Created by Charly on 11/09/2014.

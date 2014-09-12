@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.model.modelobjets;
 
 import java.util.ArrayList;
 import java.util.Random;

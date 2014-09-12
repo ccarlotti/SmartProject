@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.activities;
 
 import android.content.Intent;
 import android.content.IntentSender;

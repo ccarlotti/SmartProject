@@ -1,10 +1,14 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.model;
 
 import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import florianburel.fr.smartproject.model.modelobjets.Network;
+import florianburel.fr.smartproject.model.modelobjets.Zone;
+import florianburel.fr.smartproject.model.webservice.OnNetworkRetrievedListener;
 
 /**
  * Created by fl0 on 10/09/2014.

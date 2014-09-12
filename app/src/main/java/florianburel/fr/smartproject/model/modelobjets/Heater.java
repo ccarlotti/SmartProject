@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject;
+package florianburel.fr.smartproject.model.modelobjets;
 
 /**
  * Created by fl0 on 08/09/2014.

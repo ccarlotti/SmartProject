@@ -1,9 +1,18 @@
 package florianburel.fr.smartproject;
 
 import android.app.Application;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.test.ApplicationTestCase;
+
+import florianburel.fr.smartproject.model.NetworkManager;
+import florianburel.fr.smartproject.model.modelobjets.Heater;
+import florianburel.fr.smartproject.model.modelobjets.Network;
+import florianburel.fr.smartproject.model.modelobjets.Zone;
+import florianburel.fr.smartproject.model.webservice.ConnectServer;
+import florianburel.fr.smartproject.model.webservice.OnNetworkRetrievedListener;
+import florianburel.fr.smartproject.model.webservice.OnServerCreateAccountListener;
+import florianburel.fr.smartproject.model.webservice.OnServerGetNetworkIdListener;
+import florianburel.fr.smartproject.model.webservice.OnServerLoginListener;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>

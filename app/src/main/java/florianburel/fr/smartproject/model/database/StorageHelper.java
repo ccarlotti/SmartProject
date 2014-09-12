@@ -1,4 +1,4 @@
-package florianburel.fr.smartproject.database;
+package florianburel.fr.smartproject.model.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
-import florianburel.fr.smartproject.Zone;
+import florianburel.fr.smartproject.model.modelobjets.Zone;
 
 /**
  * Created by fl0 on 11/09/2014.
