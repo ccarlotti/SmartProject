@@ -1,17 +1,22 @@
 package florianburel.fr.smartproject.model.database;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+import florianburel.fr.smartproject.R;
 import florianburel.fr.smartproject.model.modelobjets.Zone;
 
 /**
  * Created by fl0 on 11/09/2014.
  */
 public class StorageHelper extends SQLiteOpenHelper{
+
+    private final static String PrefAppFileName="fr.smartpilot.www"; //Notation DNS inversée pourquoi pas ?
+    private final static String PrefAppKeyNetworkId="key_networdid"; //Clé associée dans le dictionnaire des Keys
 
     private Context context;
 
@@ -63,11 +68,17 @@ public class StorageHelper extends SQLiteOpenHelper{
     public String getNetworkID()
     {
         // TODO : récuperer le networkID dans les preferences
-        return "";
+        SharedPreferences sharedPref = context.getSharedPreferences(PrefAppFileName,Context.MODE_PRIVATE);
+        return sharedPref.getString(PrefAppKeyNetworkId,null); //Key,Value_default
     }
 
+    //Dans les préférences de l'application
     public void setNetworkID(String networkID)
     {
         // TODO : enregistrer le networkID dans les preferences
+        SharedPreferences sharedPref = context.getSharedPreferences(PrefAppFileName,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(PrefAppKeyNetworkId, networkID); //Key, Value
+        editor.commit();//On écrit
     }
 }

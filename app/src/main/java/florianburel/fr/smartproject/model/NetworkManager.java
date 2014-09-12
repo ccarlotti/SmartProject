@@ -29,7 +29,7 @@ public class NetworkManager
         }
         else
         {
-            final StorageHelper store = new StorageHelper();
+            final StorageHelper store = new StorageHelper(context);
             String network_id = store.getNetworkID();
 
             //Si networkId enregistré dans les préférence des Applications
@@ -43,7 +43,7 @@ public class NetworkManager
             //aller la chercher sur PARSE
             else
             {
-                ConnectServer server = ConnectServer.getInstance(); //récupération du Singleton
+                ConnectServer server = ConnectServer.getInstance(context); //récupération du Singleton
 
                 //se connecter au serveur et récupérer le networkId
                 final String finalNetwork_id = network_id;
@@ -80,43 +80,26 @@ public class NetworkManager
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  /*******************Singleton***********************/
 
     private static NetworkManager instance;
+    private static Context context;
 
 
-    public static NetworkManager getInstance() {
+    public static NetworkManager getInstance(Context c) {
         if(instance == null)
         {
-            instance = new NetworkManager();
+            instance = new NetworkManager(c);
         }
         return instance;
     }
 
-    private NetworkManager() {
+    //Constructeur
+    //A chaque fois qu'on appèle le NetworkManager, on récupère le ctx courant
+    private NetworkManager(Context ctx)
+    {
+      ctx = ctx.getApplicationContext();//On récupère le  ctx courant
+      context = ctx; //update du singleton
     }
 
     /*************************************************/

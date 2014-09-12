@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.test.ApplicationTestCase;
 
+import java.util.ArrayList;
+
 import florianburel.fr.smartproject.model.NetworkManager;
+import florianburel.fr.smartproject.model.database.StorageHelper;
 import florianburel.fr.smartproject.model.modelobjets.Heater;
 import florianburel.fr.smartproject.model.modelobjets.Network;
 import florianburel.fr.smartproject.model.modelobjets.Zone;
@@ -22,6 +25,41 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    //TEST: testStorageHelperGetAllZone
+    public void testStorageHelperGetAllZone()
+    {
+        //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
+        createApplication(); //Permet de récupérer un context dans les tests unitaires
+        Context ctx = getApplication().getApplicationContext();
+
+        StorageHelper strhlp = new StorageHelper(ctx);
+
+        ArrayList<Zone> aZ = strhlp.getAllZone();
+        assertTrue(aZ.size()>= 3); //On test qu'il ai au moins 3 éléments
+    }
+
+    //TEST: : testStorageHelperNetworkId
+    public void testStorageHelperNetworkId()
+    {
+        //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
+        createApplication(); //Permet de récupérer un context dans les tests unitaires
+        Context ctx = getApplication().getApplicationContext();
+        //ConnectServer csv = ConnectServer.getInstance(ctx);
+
+        //On écrit, on lit et on verifie
+        StorageHelper sthlp = new StorageHelper(ctx);
+
+        sthlp.setNetworkID("toto");
+        if(sthlp.getNetworkID().equals("toto"))
+            assertTrue(true);
+        else assertTrue(false);
+
+        sthlp.setNetworkID("tata");
+        if(sthlp.getNetworkID().equals("tata"))
+            assertTrue(true);
+        else assertTrue(false);
+    }
+
     //TEST : createAccount with ConnectServer
     public  void testConnectServerCreateAccount()
     {
@@ -30,8 +68,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         Context ctx = getApplication().getApplicationContext();
         ConnectServer csv = ConnectServer.getInstance(ctx);
 
-        csv.createAccount("charly13111@hotmail.fr","courrier",new OnServerCreateAccountListener()
-        {
+        csv.createAccount("charly13111@hotmail.fr", "courrier", new OnServerCreateAccountListener() {
 
             @Override
             public void CreateAccountOK() {
@@ -109,7 +146,10 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     // TEST : Recuperation du reseau
     public void testRetrieveNetwork()
     {
-        NetworkManager mgr = NetworkManager.getInstance();
+        //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
+        createApplication(); //Permet de récupérer un context dans les tests unitaires
+        Context ctx = getApplication().getApplicationContext();
+        NetworkManager mgr = NetworkManager.getInstance(ctx);
 
         mgr.retrieveNetwork(new OnNetworkRetrievedListener() {
             @Override
