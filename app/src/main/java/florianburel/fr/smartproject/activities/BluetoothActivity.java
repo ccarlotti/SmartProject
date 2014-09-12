@@ -2,6 +2,8 @@ package florianburel.fr.smartproject.activities;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +26,7 @@ public class BluetoothActivity extends Activity implements View.OnClickListener 
     private ListView listView;
 
     private ArrayList<String> devices;
+    private BluetoothAdapter bluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +47,27 @@ public class BluetoothActivity extends Activity implements View.OnClickListener 
         if(!isBluetoothEnabled() || !BluetoothAdapter.getDefaultAdapter().isEnabled())
         {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, CODE_RETOUR_BLUETOOTH);
+            startActivity(enableBtIntent);
         }
         else
         {
             Toast.makeText(this, "Bluetooth ok", Toast.LENGTH_LONG).show();
+
+            // Recuperation du bluetooth adapter
+            final BluetoothManager bluetoothManager =
+                    (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+            bluetoothAdapter = bluetoothManager.getAdapter();
+
+
+            beginScan();
         }
+
+
+    }
+
+    private void beginScan() {
+
+        
     }
 
     public boolean isBluetoothEnabled()
