@@ -85,4 +85,8 @@ public class ConnectServer
             }
         });
     }
+
+    public void createAccount(String emailSaisie, String motDePasseSaisie) {
+
+    }
 }
