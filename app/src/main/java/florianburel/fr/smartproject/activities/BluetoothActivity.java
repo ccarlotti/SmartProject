@@ -26,6 +26,9 @@ public class BluetoothActivity extends Activity implements View.OnClickListener,
     private ArrayList<String> devices = new ArrayList<String>();
     private BluetoothAdapter bluetoothAdapter;
 
+    // le scan est-il en cours
+    private boolean isScanning = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,13 @@ public class BluetoothActivity extends Activity implements View.OnClickListener,
         }
         else  // Ok
         {
-            beginScan(); // Debut du scan
+            if(!isScanning) {
+                beginScan(); // Debut du scan
+            }
+            else
+            {
+                Toast.makeText(this, "On scan déjà!", Toast.LENGTH_LONG).show();
+            }
         }
 
 
@@ -97,5 +106,17 @@ public class BluetoothActivity extends Activity implements View.OnClickListener,
 
     private void refreshListView() {
         this.listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.devices));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Stop scanning quand l'activity disparait
+        if(isScanning)
+        {
+            bluetoothAdapter.stopLeScan(this);
+            isScanning = false;
+        }
     }
 }
