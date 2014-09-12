@@ -7,15 +7,11 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.model.TileOverlay;
 
 import java.util.ArrayList;
 
@@ -23,18 +19,24 @@ import florianburel.fr.smartproject.R;
 
 public class BluetoothActivity extends Activity implements View.OnClickListener, BluetoothAdapter.LeScanCallback {
 
-    private static final int CODE_RETOUR_BLUETOOTH = 1024;
     private Button button;
     private ListView listView;
 
-    private ArrayList<String> devices;
+    private ArrayList<String> devices = new ArrayList<String>();
     private BluetoothAdapter bluetoothAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth2);
+
+        this.devices.add("Test");
+
+
+
         bind();
+
+        refreshListView();
     }
 
     private void bind() {
@@ -88,7 +90,11 @@ public class BluetoothActivity extends Activity implements View.OnClickListener,
 
         this.devices.add("device : " + bluetoothDevice.getName());
 
-        this.listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.devices));
+        refreshListView();
 
+    }
+
+    private void refreshListView() {
+        this.listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.devices));
     }
 }
