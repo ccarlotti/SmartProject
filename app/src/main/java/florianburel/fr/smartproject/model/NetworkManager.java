@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import florianburel.fr.smartproject.model.database.StorageHelper;
 import florianburel.fr.smartproject.model.modelobjets.Network;
 import florianburel.fr.smartproject.model.modelobjets.Zone;
+import florianburel.fr.smartproject.model.webservice.ConnectServer;
 import florianburel.fr.smartproject.model.webservice.OnNetworkRetrievedListener;
+import florianburel.fr.smartproject.model.webservice.OnServerGetNetworkIdListener;
 
 /**
  * Created by fl0 on 10/09/2014.
@@ -20,39 +23,45 @@ public class NetworkManager
 
     public void retrieveNetwork(final OnNetworkRetrievedListener l)
     {
-        //Délais virtuel d'attente de 10s
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Network n = new Network("toto");
-                l.networkFound(n);
-            }
-        };
-
-        Timer timer = new Timer();
-        timer.schedule(task, 10000);
-
-     /*   if(network != null)
+         if(network != null)
         {
             l.networkFound(network);
         }
         else
         {
-            String network_id = recupereIDDansLesPreferencesDeLAppli();
+            final StorageHelper store = new StorageHelper();
+            String network_id = store.getNetworkID();
 
+            //Si networkId enregistré dans les préférence des Applications
             if(network_id != null)
             {
+                //alors se connecter au réseau domestique
                 network = new Network(network_id);
                 l.networkFound(network);
             }
+            //Si networkId non enregistré dans les préférence des Applications
+            //aller la chercher sur PARSE
             else
             {
-                network_id = recupererLIDViaParse();
-                saveDansLesPreferencesDeLAppli(network_id);
-                network = new Network(network_id);
-                l.networkFound(network);
+                ConnectServer server = ConnectServer.getInstance(); //récupération du Singleton
+
+                //se connecter au serveur et récupérer le networkId
+                final String finalNetwork_id = network_id;
+                server.getNetworkId(new OnServerGetNetworkIdListener()
+                {
+                    //Exécuté lorsque l'Id est trouvé
+                    @Override
+                    public void onNetworkFound(String id)
+                    {
+                      //Sauvegarder le networkId dans les préférences des App
+                      store.setNetworkID(id);
+                        //alors se connecter au réseau domestique
+                        network = new Network(id);
+                        l.networkFound(network);
+                    }
+                });
             }
-        }*/
+        }
     }
 
     public ArrayList<Zone> getAllZone(Context context)

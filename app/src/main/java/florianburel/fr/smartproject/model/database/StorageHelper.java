@@ -70,5 +70,4 @@ public class StorageHelper extends SQLiteOpenHelper{
     {
         // TODO : enregistrer le networkID dans les preferences
     }
-
 }
