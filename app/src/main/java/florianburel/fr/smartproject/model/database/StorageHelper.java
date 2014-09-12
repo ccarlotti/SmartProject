@@ -1,5 +1,6 @@
 package florianburel.fr.smartproject.model.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -115,8 +116,21 @@ public class StorageHelper extends SQLiteOpenHelper{
 
     public Zone createZone(String name)
     {
-        // TODO : ajouter une nouvelle zone dans la database
-        return null;
+        Zone z = new Zone(name);
+        z.setPoint(10);
+
+        // Transformation en contentValues
+        ContentValues cv = new ContentValues();
+        cv.put("z_name", z.getName()); // Colonne - Valeur
+        cv.put("z_point", z.getPoint());
+
+        // Recup de la db en mode ecriture
+        SQLiteDatabase db = getWritableDatabase();
+
+         // Insertion en base
+         db.insert("Zone", null, cv); // Insert cv dans la table Zone
+
+        return z;
     }
 
     // Store & retrieve NetworkID in the preference system
