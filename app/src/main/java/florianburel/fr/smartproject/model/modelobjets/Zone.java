@@ -9,6 +9,16 @@ import java.util.Random;
 public class Zone
 {
 
+    private int id;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public enum HeatingMode
     {
         ECO, CONFORT, STOP, HORS_GEL, PROG,

@@ -2,6 +2,7 @@ package florianburel.fr.smartproject.model.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -75,10 +76,40 @@ public class StorageHelper extends SQLiteOpenHelper{
     {
         String sql = "SELECT z_id, z_name, z_mode, z_point FROM Zone;";
 
+        // Stockera les resultats a retourner
+        ArrayList<Zone> zones = new ArrayList<Zone>();
 
-        // TODO : Recuperer le resultat de la requete et le tranformer en ArrayList<Zone>
+        // Recuperer la bdd en mode lecture seule
+        SQLiteDatabase db = getReadableDatabase();
 
-        return null;
+        // Executer le SQL
+        Cursor c = db.rawQuery(sql, null); // 2eme param = arg[] (syntaxe printf)
+
+        c.moveToFirst(); // deplace le cursor en haut a gauche
+        while (!c.isAfterLast()) // parcours du tableau
+        {
+            // Recuperation des infos
+            int id = c.getInt(0); // id
+            String name = c.getString(1);
+            int mode = c.getInt(2);
+            int point  = c.getInt(3);
+
+            // Chaque ligne = 1 Zone
+            Zone zone = new Zone(name);
+            zone.setMode(Zone.HeatingMode.ECO);
+            zone.setPoint(point);
+            zone.setId(id);
+
+            // Ajout de la zone aux resultats
+            zones.add(zone);
+
+            c.moveToNext(); //!!!!!!!!!!!!! ligne suivantes
+        }
+
+        c.close(); // !!!!!!!!!!
+
+
+        return zones;
     }
 
 
