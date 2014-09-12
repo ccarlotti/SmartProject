@@ -1,6 +1,7 @@
 package florianburel.fr.smartproject.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
@@ -48,22 +49,26 @@ public class BluetoothActivity extends Activity implements View.OnClickListener,
     @Override
     public void onClick(View view) {
 
-        if(!isBluetoothEnabled() || !BluetoothAdapter.getDefaultAdapter().isEnabled())
+        // Recuperation du bluetooth manager
+        // Si pas disponible => pas de bluetooth
+
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        bluetoothAdapter = bluetoothManager.getAdapter();
+
+        if(bluetoothAdapter == null) // Pas de bluetooth
+        {
+            AlertDialog.Builder ad = new AlertDialog.Builder(this);
+            ad.setTitle("Pas de bluetooth").setMessage("Désolé!").setNegativeButton("Cancel", null).show();
+        }
+        else if(!bluetoothAdapter.isEnabled()) // Bluetooth present mais pas activé
         {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBtIntent);
         }
-        else
+        else  // Ok
         {
-
-
-            // Recuperation du bluetooth adapter
-            final BluetoothManager bluetoothManager =
-                    (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-            bluetoothAdapter = bluetoothManager.getAdapter();
-
-
-            beginScan();
+            beginScan(); // Debut du scan
         }
 
 
@@ -71,18 +76,14 @@ public class BluetoothActivity extends Activity implements View.OnClickListener,
 
     private void beginScan() {
 
+        Toast.makeText(this, "Début du scan!!", Toast.LENGTH_LONG).show();
+
         // Start scan pour L.E. device
-        bluetoothAdapter.startLeScan(this);
+        bluetoothAdapter.startLeScan(this); // la methode onLeScan() est rapelé a chaque appareil trouvé
 
-        Toast.makeText(this, "Begin scan", Toast.LENGTH_LONG).show();
+
     }
 
-    public boolean isBluetoothEnabled()
-    {
-
-        BluetoothAdapter blueAdapter = BluetoothAdapter.getDefaultAdapter();
-        return blueAdapter != null;
-    }
 
     @Override
     public void onLeScan(BluetoothDevice bluetoothDevice, int i, byte[] bytes) {
