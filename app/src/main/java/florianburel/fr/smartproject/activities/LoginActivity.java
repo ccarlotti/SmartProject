@@ -142,7 +142,7 @@ public class LoginActivity extends Activity
 
     private void gotoMyHouse(Context context) {
         //On bascule sur l'autre activity "my_house_activity"
-        Intent t = new Intent(context,MyHouseActivity.class);
+        Intent t = new Intent(context,BluetoothActivity.class); // TODO : change to : Intent t = new Intent(context,MyHouseActivity.class);
         t.putExtra("dummy_value",10); //Valeur à passer à MyHouseActivity
         startActivity(t); //aller on change d'activitiy !
     }

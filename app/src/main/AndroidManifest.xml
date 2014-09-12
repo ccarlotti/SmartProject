@@ -14,15 +14,11 @@
         <activity
             android:name=".activities.ZoneDetailActivity"
             android:label="@string/title_activity_zone_detail" >
-
         </activity>
-
         <activity
             android:name=".activities.MyHouseActivity"
             android:label="My Home" >
-
         </activity>
-
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/title_activity_login"
@@ -37,6 +33,11 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".activities.BluetoothActivity"
+            android:label="@string/title_activity_bluetooth" >
+        </activity>
     </application>
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
