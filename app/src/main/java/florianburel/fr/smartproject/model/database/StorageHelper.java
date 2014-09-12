@@ -36,21 +36,45 @@ public class StorageHelper extends SQLiteOpenHelper{
         // CREATION DE LA TABLE ZONE
         String sql = "create table Zone\n" +
                 "(\n" +
-                "  z_name \"VARCHAR()\",\n" +
+                "  z_id    INTEGER not null primary key autoincrement,\n" +
+                "  z_name  \"VARCHAR()\",\n" +
+                "  z_mode  INTEGER,\n" +
+                "  z_point INTEGER\n" +
                 ");";
         sqLiteDatabase.execSQL(sql);
 
+        sql = "create table Device\n" +
+                "(\n" +
+                "  z_id INTEGER,\n" +
+                "  uuid INTEGER\n" +
+                ");";
+        sqLiteDatabase.execSQL(sql);
 
+        sql = "INSERT INTO ZONE(z_id, z_name, z_mode, z_point) VALUES(0, \"zone 1\", 1, 20);";
+        sqLiteDatabase.execSQL(sql);
+        sql = "INSERT INTO ZONE(z_id, z_name, z_mode, z_point) VALUES(1, \"zone 2\", 1, 20);";
+        sqLiteDatabase.execSQL(sql);
+        sql = "INSERT INTO ZONE(z_id, z_name, z_mode, z_point) VALUES(2, \"zone 3\", 1, 20);";
+        sqLiteDatabase.execSQL(sql);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
-        // Code de màj de la db
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int version_en_cours, int nouvelle_version) {
+
+        switch (version_en_cours)
+        {
+            case 1:
+                // maj v1 -> v2
+
+            case 2:
+                // maj v2 -> v3
+        }
     }
 
     public ArrayList<Zone> getAllZone()
     {
-        String sql = "SELECT z_name FROM Zone;";
+        String sql = "SELECT z_id, z_name, z_mode, z_point FROM Zone;";
+
 
         // TODO : Recuperer le resultat de la requete et le tranformer en ArrayList<Zone>
 
