@@ -31,6 +31,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -131,11 +133,7 @@ public class LoginActivity extends Activity
                 @Override
                 public void OnSucces() {
                     dialog.dismiss();//pour effacer le spinner
-
-                    //On bascule sur l'autre activity "my_house_activity"
-                    Intent t = new Intent(context,MyHouseActivity.class);
-                    t.putExtra("dummy_value",10); //Valeur à passer à MyHouseActivity
-                    startActivity(t); //aller on change d'activitiy !
+                    gotoMyHouse(context);
                 }
                 // si erreur : effacer email / password et afficher un msg
                 @Override
@@ -159,6 +157,13 @@ public class LoginActivity extends Activity
 
     }
 
+    private void gotoMyHouse(Context context) {
+        //On bascule sur l'autre activity "my_house_activity"
+        Intent t = new Intent(context,MyHouseActivity.class);
+        t.putExtra("dummy_value",10); //Valeur à passer à MyHouseActivity
+        startActivity(t); //aller on change d'activitiy !
+    }
+
     /**
      * Appeler lorsque l'utilisateur clique sur S'enregistrer
      */
@@ -171,16 +176,33 @@ public class LoginActivity extends Activity
 
         if(isEmailValid(emailSaisie) && isPasswordValid(motDePasseSaisie))
         {
-            AlertDialog.Builder ad = new AlertDialog.Builder(context); //this est le context en cours
+            final AlertDialog.Builder ad = new AlertDialog.Builder(context); //this est le context en cours
             ad.setTitle("Voulez vous creer un compte"); //Title du popup
-            ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            ad.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+            {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                public void onClick(DialogInterface dialogInterface, int i)
+                {
                     ConnectServer server = ConnectServer.getInstance(context);
-                    server.createAccount(emailSaisie, motDePasseSaisie);
+
+                    server.createAccount(emailSaisie,motDePasseSaisie,new OnServerCreateAccountListener()
+                    {
+
+                        @Override
+                        public void CreateAccountOK()
+                        {
+                            gotoMyHouse(context);
+                        }
+
+                        @Override
+                        public void CreateAccountKO()
+                        {
+                            Toast.makeText(context,"Impossible de créer le compte",Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-            });
-            ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+            {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 

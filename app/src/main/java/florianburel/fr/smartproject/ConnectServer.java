@@ -9,6 +9,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import java.util.List;
 
@@ -45,9 +46,11 @@ public class ConnectServer
     //méthode login
     public void login(String email,String pw, final OnServerLoginListener l)
     {
-        ParseUser.logInInBackground(email, pw, new LogInCallback() {
+        ParseUser.logInInBackground(email, pw, new LogInCallback()
+        {
             @Override
-            public void done(ParseUser parseUser, ParseException e) {
+            public void done(ParseUser parseUser, ParseException e)
+            {
                 if(parseUser != null)//si login succes
                 {
                     connectedUser = parseUser;
@@ -67,26 +70,46 @@ public class ConnectServer
         ParseQuery<ParseObject> query = ParseQuery.getQuery("network"); //nom de la table créee dans le prj parse.com "SmartPilot"
         query.whereEqualTo("user",connectedUser); //nom de la colonne à filtrer dans la table ci-dessus avec la valeur du filtre
         //Listener lorsque l'info à été trouvée dans la table
-        query.findInBackground(new FindCallback<ParseObject>() {
+        query.findInBackground(new FindCallback<ParseObject>()
+        {
             @Override
             public void done(List<ParseObject> objects, ParseException e)
             {
                 //Si pas de pb
-                if(e==null)
-                {
-                 ParseObject network = objects.get(0);//On récupère le premier objet de la liste retournée car un seul élément
-                 String id = network.getString("networkID"); //On récupère le networkID dans la colonne du même nom de la table "network"
-                 l.onNetworkFound(id); //On solicite le listener
-                }
-                else
-                {
+                if (e == null) {
+                    ParseObject network = objects.get(0);//On récupère le premier objet de la liste retournée car un seul élément
+                    String id = network.getString("networkID"); //On récupère le networkID dans la colonne du même nom de la table "network"
+                    l.onNetworkFound(id); //On solicite le listener
+                } else {
 
                 }
             }
         });
     }
 
-    public void createAccount(String emailSaisie, String motDePasseSaisie) {
+    public void createAccount(String emailSaisie, String motDePasseSaisie,final OnServerCreateAccountListener l )
+    {
+        final ParseUser user = new ParseUser();
+        user.setUsername(emailSaisie); //same as email
+        user.setPassword(motDePasseSaisie);
+        user.setEmail(emailSaisie);
 
+        //méthode asynchrone
+        user.signUpInBackground(new SignUpCallback()
+        {
+            public void done(ParseException e)
+            {
+                if (e == null)
+                {
+                    // Hooray! Let them use the app now.
+                    connectedUser = user; // On set le connectedUser car le connect est fait en même temps que le SignUp
+                    l.CreateAccountOK();
+                } else {
+                    // Sign up didn't succeed. Look at the ParseException
+                    // to figure out what went wrong
+                    l.CreateAccountKO();
+                }
+            }
+        });
     }
 }

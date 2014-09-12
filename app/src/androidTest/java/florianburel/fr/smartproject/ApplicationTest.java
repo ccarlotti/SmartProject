@@ -13,14 +13,32 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
-
-    // Test bluetooth
-    public void testHasBluetooth()
+    //TEST : createAccount with ConnectServer
+    public  void testConnectServerCreateAccount()
     {
-        assertNotNull(BluetoothAdapter.getDefaultAdapter());
+        //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
+        createApplication(); //Permet de récupérer un context dans les tests unitaires
+        Context ctx = getApplication().getApplicationContext();
+        ConnectServer csv = ConnectServer.getInstance(ctx);
+
+        csv.createAccount("charly13111@hotmail.fr","courrier",new OnServerCreateAccountListener()
+        {
+
+            @Override
+            public void CreateAccountOK() {
+                assertTrue(true);
+
+            }
+
+            @Override
+            public void CreateAccountKO() {
+                assertTrue(false);
+
+            }
+        });
     }
 
-       //TEST login with ConnectServer
+    //TEST login with ConnectServer
     public void testConnecServerLogin()
     {
         //On utilise un context dummy car on n'a pas d'activity en Test Unitaire
@@ -28,7 +46,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         Context ctx = getApplication().getApplicationContext();
         ConnectServer csv = ConnectServer.getInstance(ctx);
 
-        csv.login("ccarlotti@worldsat.fr", "cachou13100", new OnServerLoginListener() {
+        /*csv.login("ccarlotti@worldsat.fr", "cachou13100", new OnServerLoginListener()*/
+        csv.login("charly13111@hotmail.fr", "courrier", new OnServerLoginListener(){
             @Override
             public void OnSucces() {
                 assertTrue(true);
